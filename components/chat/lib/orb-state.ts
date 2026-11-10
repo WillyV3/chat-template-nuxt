@@ -13,7 +13,7 @@
 // `--before` override on Willy's direct authorisation 2026-08-07 — the cooldown
 // is a deliberate control, not an obstacle to route around silently.
 
-import type { OrbState } from "thinking-orbs";
+import type { OrbState } from "@/components/chat/orb/modes";
 
 export type { OrbState };
 

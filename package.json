@@ -16,6 +16,7 @@
     "@json-render/core": "0.21.4",
     "@json-render/vue": "0.21.4",
     "@lucide/vue": "1.66.0",
+    "@stream-markdown/code": "2.1.0",
     "@vueuse/core": "15.0.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
@@ -32,6 +33,7 @@
     "vue": "3.5.44",
     "vue-router": "5.4.0",
     "vue-sonner": "2.0.9",
+    "vue-stream-markdown": "2.1.0",
     "zod": "4.6.7"
   },
   "devDependencies": {

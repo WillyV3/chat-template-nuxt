@@ -13,6 +13,12 @@ export const alertVariants = cva(
         default: "bg-card text-card-foreground",
         destructive:
           "text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
+        // The app already spoke in amber (needs-attention) and teal
+        // (informational) but did it by hand at 17 call sites. The treatments
+        // live here now so they can't drift apart. Added 2026-07-27.
+        warning:
+          "border-amber-500/40 bg-amber-500/5 [&>svg]:text-amber-600 dark:[&>svg]:text-amber-500",
+        info: "border-primary/40 bg-primary/5 [&>svg]:text-primary",
       },
     },
     defaultVariants: {

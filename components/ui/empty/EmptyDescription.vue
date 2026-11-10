@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <p
+  <div
     data-slot="empty-description"
     :class="cn(
       'text-muted-foreground [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4',
@@ -16,5 +16,5 @@ const props = defineProps<{
     )"
   >
     <slot />
-  </p>
+  </div>
 </template>

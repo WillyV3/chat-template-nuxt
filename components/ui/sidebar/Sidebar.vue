@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { SidebarProps } from "."
 import { cn } from "@/lib/utils"
+import SidebarRail from "./SidebarRail.vue"
 import { Sheet, SheetContent } from '@/components/ui/sheet'
 import SheetDescription from '@/components/ui/sheet/SheetDescription.vue'
 import SheetHeader from '@/components/ui/sheet/SheetHeader.vue'
@@ -17,14 +18,14 @@ const props = withDefaults(defineProps<SidebarProps>(), {
   collapsible: "offcanvas",
 })
 
-const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+const { isMobile, state, openMobile, setOpenMobile, isDraggingRail } = useSidebar()
 </script>
 
 <template>
   <div
     v-if="collapsible === 'none'"
     data-slot="sidebar"
-    :class="cn('bg-sidebar text-sidebar-foreground flex w-(--sidebar-width) flex-col', props.class)"
+    :class="cn('bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col', props.class)"
     v-bind="$attrs"
   >
     <slot />
@@ -51,6 +52,8 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     </SheetContent>
   </Sheet>
 
+  <!-- While the rail is dragged, width transitions are suppressed below so
+       the panel tracks the pointer 1:1 instead of easing behind it. -->
   <div
     v-else
     class="group peer text-sidebar-foreground hidden md:block"
@@ -59,21 +62,26 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     :data-collapsible="state === 'collapsed' ? collapsible : ''"
     :data-variant="variant"
     :data-side="side"
+    :data-dragging="isDraggingRail"
   >
     <!-- This is what handles the sidebar gap on desktop  -->
     <div
+      data-slot="sidebar-gap"
       :class="cn(
         'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
         'group-data-[collapsible=offcanvas]:w-0',
         'group-data-[side=right]:rotate-180',
+        'group-data-[dragging=true]:transition-none',
         variant === 'floating' || variant === 'inset'
           ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]'
           : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon)',
       )"
     />
     <div
+      data-slot="sidebar-container"
       :class="cn(
         'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
+        'group-data-[dragging=true]:transition-none',
         side === 'left'
           ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
           : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
@@ -87,10 +95,15 @@ const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
     >
       <div
         data-sidebar="sidebar"
+        data-slot="sidebar-inner"
         class="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
       >
         <slot />
       </div>
+      <!-- Drag handle — rendered here (not by consumers) so EVERY desktop
+           sidebar is resizable. Desktop only: the mobile branch above is a
+           Sheet and never reaches this code. -->
+      <SidebarRail :side="side" />
     </div>
   </div>
 </template>
