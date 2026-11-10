@@ -9,6 +9,8 @@ export default defineNuxtConfig({
   components: { dirs: [] },
   imports: { autoImport: false },
   css: ["@/app.css"],
+  // Match the React template's tsconfig: the copied core is written against it.
+  typescript: { tsConfig: { compilerOptions: { noUncheckedIndexedAccess: false } } },
   vite: { plugins: [tailwindcss()] },
   app: {
     head: {
