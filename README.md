@@ -2,10 +2,8 @@
 
 A Nuxt 4 (Vue 3) chat app shell: left rail, chat, right panel on one shared top row,
 plus Sontara's theme system. Auth, database and AI provider are all yours to pick.
-A 1:1 port of the React/Next template (`chat-template`).
-
-The chat and theme code is vendored from Sontara (`astrobot/packages/chat`,
-`packages/core`, the web theme libs), kept close to the original so it can be re-synced.
+A one-time 1:1 port of HFL's React/Next chat template, whose chat and theme code
+comes from Sontara. This port is not kept in sync with either.
 
 ```
 app.vue                 theme cookie -> inlined CSS vars (no flash), dark mode, mounts the app
