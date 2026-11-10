@@ -5,6 +5,12 @@ plus Sontara's theme system. Auth, database and AI provider are all yours to pic
 A one-time 1:1 port of HFL's React/Next chat template, whose chat and theme code
 comes from Sontara. This port is not kept in sync with either.
 
+![Generative UI in the chat](docs/gen-ui.png)
+
+| Skins (~1000 themes) | Chat sessions panel, light mode |
+|---|---|
+| ![Skins](docs/themes.png) | ![Sessions](docs/sessions-light.png) |
+
 ```
 app.vue                 theme cookie -> inlined CSS vars (no flash), dark mode, mounts the app
 components/app/         EXAMPLE app: rail, chat sessions panel, conversations: replace these
