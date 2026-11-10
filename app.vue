@@ -32,7 +32,9 @@ useHead({
   bodyAttrs: { class: "h-full" },
   // Dark class before first paint (next-themes' inline script).
   script: [{ innerHTML: COLOR_MODE_SCRIPT, tagPriority: "critical" }],
-  style: [{ id: THEME_STYLE_ID, innerHTML: themeCss(initialTheme) }],
+  // bodyOpen, not head: it must come AFTER app.css so the theme beats its defaults
+  // (React puts it in <body> for the same reason), and still before any content.
+  style: [{ id: THEME_STYLE_ID, innerHTML: themeCss(initialTheme), tagPosition: "bodyOpen" }],
   link: [
     { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },
     { rel: "stylesheet", href: THEME_WEBFONTS_HREF },

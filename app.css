@@ -152,7 +152,11 @@
 }
 
 /* shadcn neutral. The theme picker overrides these at runtime. */
+/* The theme catalog names next/font's vars; here they point at the Google Fonts link in nuxt.config. */
 :root {
+  --font-geist-sans: "Geist";
+  --font-geist-mono: "Geist Mono";
+  --font-literata: "Literata";
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

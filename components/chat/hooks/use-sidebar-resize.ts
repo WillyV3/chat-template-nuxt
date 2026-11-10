@@ -21,13 +21,13 @@ export interface UseSidebarResizeOptions {
   /** "right" for a left-hand panel (handle on its right edge), "left" for a right-hand panel. */
   direction?: SidebarResizeDirection
   /** Current panel width, e.g. "16rem" or "260px". */
-  currentWidth: string
+  currentWidth: MaybeRefOrGetter<string>
   /** Commit a new width to reactive state. Called at drag start and on pointer up. */
   onResize: (width: string) => void
   /** Toggle collapsed/expanded — fires on a plain click and on drag-to-(un)collapse. */
   onToggle?: () => void
   /** Whether the panel is currently collapsed. */
-  isCollapsed?: boolean
+  isCollapsed?: MaybeRefOrGetter<boolean>
   /** Lower clamp, e.g. "14rem". */
   minResizeWidth?: string
   /** Upper clamp, e.g. "22rem". */
@@ -108,10 +108,10 @@ export function useSidebarResize(options: MaybeRefOrGetter<UseSidebarResizeOptio
     const v = toValue(options)
     return {
       direction: v.direction ?? "right",
-      currentWidth: v.currentWidth,
+      currentWidth: toValue(v.currentWidth),
       onResize: v.onResize,
       onToggle: v.onToggle,
-      isCollapsed: v.isCollapsed ?? false,
+      isCollapsed: toValue(v.isCollapsed) ?? false,
       minResizeWidth: v.minResizeWidth ?? "14rem",
       maxResizeWidth: v.maxResizeWidth ?? "22rem",
       enableToggle: v.enableToggle ?? true,
