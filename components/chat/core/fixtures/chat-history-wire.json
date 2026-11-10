@@ -1,0 +1,10 @@
+{
+  "messages": [
+    { "role": "user", "content": "go", "timestamp": 1000 },
+    { "role": "assistant", "content": "", "timestamp": 1001, "toolCalls": [{ "id": "c1", "name": "shell", "args": { "command": "sleep 1" } }] },
+    { "role": "tool", "content": "", "timestamp": 1002, "toolCallId": "c1", "toolName": "shell", "success": true },
+    { "role": "assistant", "content": "", "timestamp": 1003, "toolCalls": [{ "id": "c2", "name": "shell", "args": { "command": "sleep 1" } }] },
+    { "role": "tool", "content": "exit 1", "timestamp": 1004, "toolCallId": "c2", "toolName": "shell", "success": false },
+    { "role": "assistant", "content": "", "timestamp": 1005, "toolCalls": [{ "id": "c3", "name": "shell", "args": { "command": "sleep 1" } }] }
+  ]
+}
